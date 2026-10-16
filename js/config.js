@@ -11,7 +11,7 @@ window.SITE_CONFIG = {
   jobTitle: "独立开发者 · 工具作者",
   domain: "yankai.cc.cd",          // 不带动 http(s)://
   url: "https://yankai.cc.cd",     // 与 domain 保持一致
-  email: "hi@yankai.cc.cd",
+  email: "1967372480@qq.com",
   location: "中国",
 
   // SEO
@@ -20,8 +20,8 @@ window.SITE_CONFIG = {
 
   // 社交与外部链接（顺序即展示顺序，icon 可选：github / mail / rss / link）
   socials: [
-    { label: "GitHub", url: "https://github.com/312yankai", icon: "github" },
-    { label: "邮箱",   url: "mailto:hi@yankai.cc.cd",      icon: "mail" },
-    { label: "博客",   url: "https://yankai.cc.cd/blog",   icon: "rss" }
+    { label: "GitHub", url: "https://github.com/312yankai",  icon: "github" },
+    { label: "邮箱",   url: "mailto:1967372480@qq.com",      icon: "mail" },
+    { label: "博客",   url: "https://yankai.cc.cd/blog",     icon: "rss" }
   ]
 };

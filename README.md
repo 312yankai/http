@@ -18,12 +18,10 @@ site/
 
 ## 1. 上线前还需替换的内容
 
-域名（`yankai.cc.cd`）、显示名（`Yankai`）、GitHub（`312yankai`）已填好。**剩下这几处需要你确认/替换**：
+域名（`yankai.cc.cd`）、显示名（`Yankai`）、GitHub（`312yankai`）、邮箱（`1967372480@qq.com`）已填好。**剩下这几处需要你确认/替换**：
 
 | 位置 | 当前值 | 说明 |
 |---|---|---|
-| `js/config.js` → `email` | `hi@yankai.cc.cd` | 改成真实邮箱（若该地址可用则无需改）|
-| `index.html` → JSON-LD `email` | 同上 | 与上保持一致 |
 | `index.html` 项目卡 ×6 | 占位项目 | 换成真实项目名/描述/链接 |
 | `index.html` 技能 ×4 | 占位技能 | 按实际技术栈调整 |
 | `index.html` 经历 ×3 | 占位经历 | 换成真实公司/时间/职责 |
