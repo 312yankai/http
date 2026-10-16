@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 上线前：把 example.com 换成真实域名，lastmod 换成实际日期 -->
+<!-- lastmod 记得随内容更新 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yankai.cc.cd/</loc>

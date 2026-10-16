@@ -18,26 +18,24 @@ site/
 
 ## 1. 上线前还需替换的内容
 
-域名（`yankai.cc.cd`）已全部填好。**剩下这几处需要你自己填**：
+域名（`yankai.cc.cd`）、显示名（`Yankai`）、GitHub（`312yankai`）已填好。**剩下这几处需要你确认/替换**：
 
-| 位置 | 当前占位值 | 改成 |
+| 位置 | 当前值 | 说明 |
 |---|---|---|
-| `js/config.js` → `name` | `你的名字` | 你的显示名 |
-| `js/config.js` → `handle` | `@yourhandle` | 你的 ID |
-| `js/config.js` → `email` | `hi@yankai.cc.cd` | 真实邮箱 |
-| `js/config.js` → `socials[0].url` | `github.com/yourname` | 你的 GitHub |
-| `index.html` 正文 | 全文 `你的名字` | 同上 |
-| `index.html` JSON-LD | `name` / `email` / `sameAs` | 同上 |
-| `index.html` 项目/技能/经历 | 占位文案 | 真实内容 |
+| `js/config.js` → `email` | `hi@yankai.cc.cd` | 改成真实邮箱（若该地址可用则无需改）|
+| `index.html` → JSON-LD `email` | 同上 | 与上保持一致 |
+| `index.html` 项目卡 ×6 | 占位项目 | 换成真实项目名/描述/链接 |
+| `index.html` 技能 ×4 | 占位技能 | 按实际技术栈调整 |
+| `index.html` 经历 ×3 | 占位经历 | 换成真实公司/时间/职责 |
+| `index.html` Hero 统计 | `20+ / 5 年 / 100%` | 换成真实数字 |
+| `index.html` 关于我 | 占位文案 | 换成自我介绍 |
 
-批量替换：
+批量检查残留占位：
 
 ```bash
 cd site
-grep -rn "你的名字\|yourname\|yourhandle" .
+grep -rn "你的名字\|yourname\|yourhandle\|example.com" .   # 应为 0 结果
 ```
-
-改完全局搜索 `你的名字` 应为 0 结果。
 
 ---
 

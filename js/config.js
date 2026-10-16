@@ -6,8 +6,8 @@
  */
 window.SITE_CONFIG = {
   // 站点与个人
-  name: "你的名字",
-  handle: "@yourhandle",
+  name: "Yankai",
+  handle: "@312yankai",
   jobTitle: "独立开发者 · 工具作者",
   domain: "yankai.cc.cd",          // ← 换成你的域名，不带动 http(s)://
   url: "https://yankai.cc.cd",     // ← 与 domain 保持一致
@@ -15,12 +15,12 @@ window.SITE_CONFIG = {
   location: "中国",
 
   // SEO
-  title: "你的名字 · 作品集",
+  title: "Yankai · 作品集",
   description: "个人作品集与技术工具展示：自动化脚本、逆向工具、数据可视化。",
 
   // 社交与外部链接（顺序即展示顺序，icon 可选：github / mail / rss / link）
   socials: [
-    { label: "GitHub", url: "https://github.com/yourname", icon: "github" },
+    { label: "GitHub", url: "https://github.com/312yankai", icon: "github" },
     { label: "邮箱",   url: "mailto:hi@yankai.cc.cd",      icon: "mail" },
     { label: "博客",   url: "https://yankai.cc.cd/blog",   icon: "rss" }
   ]
