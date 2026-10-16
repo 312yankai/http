@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你的名字 · 作品集</title>
+<meta name="description" content="个人作品集与技术工具展示：自动化脚本、逆向工具、数据可视化。">
+<meta name="author" content="你的名字">
+<link rel="canonical" href="https://yankai.cc.cd/">
+
+<!-- Open Graph / 社交分享卡片 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="你的名字 · 作品集">
+<meta property="og:description" content="个人作品集与技术工具展示：自动化脚本、逆向工具、数据可视化。">
+<meta property="og:url" content="https://yankai.cc.cd/">
+<meta property="og:image" content="https://yankai.cc.cd/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%237c8cff'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif'%3EW%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
+<script defer src="js/main.js"></script>
+
+<!-- 结构化数据：上线前把 url / name 换成真实信息 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "你的名字",
+  "url": "https://yankai.cc.cd/",
+  "jobTitle": "独立开发者 · 工具作者",
+  "email": "hi@yankai.cc.cd",
+  "sameAs": ["https://github.com/yourname"]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<!-- ============ 导航 ============ -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span data-name>你的名字</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="主导航">
+      <ul class="nav-links">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#experience">经历</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="切换主题">☀</button>
+      <button class="icon-btn" id="nav-toggle" type="button" aria-label="展开菜单" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <span class="badge"><span class="pulse" aria-hidden="true"></span>可接洽合作 · 中国</span>
+      <h1>把重复劳动<br><span class="grad-text">交给工具</span>，把时间留给创造。</h1>
+      <p class="hero-sub">
+        我是 <span data-name>你的名字</span>，独立开发者。专注于自动化脚本、逆向分析与数据可视化，
+        把「手动做一遍要半天」的流程，压成一条命令。
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects">查看项目 <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#contact">聊聊合作</a>
+      </div>
+
+      <dl class="stats">
+        <div class="stat"><b>20+</b><span>已交付工具与脚本</span></div>
+        <div class="stat"><b>5 年</b><span>开发与自动化经验</span></div>
+        <div class="stat"><b>100%</b><span>开源可复现</span></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 关于 ============ -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">About</span>
+        <h2>关于我</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="prose" data-reveal>
+          <p>
+            我做的事很具体：<strong>把混乱的流程整理成可靠的自动化链路</strong>。
+            从抓取、解析、清洗到最终的可视化与交付，我习惯自己把整条链路跑通，而不是只交一半。
+          </p>
+          <p>
+            日常主要在 Python 与 Node.js 之间切换，写过逆向解析工具、批处理流水线、
+            桌面宏引擎和一堆自用的小工具。信奉的原则很简单：能脚本化的绝不重复点鼠标，
+            能被别人复现的才算真正做完。
+          </p>
+          <p>
+            目前开放远程合作与技术咨询。如果你的项目里有「这块太耗人力」的环节，
+            大概率是我感兴趣的部分。
+          </p>
+        </div>
+
+        <aside class="card" data-reveal>
+          <h3>快速信息</h3>
+          <ul class="fact-list">
+            <li><span>所在城市</span><span>中国</span></li>
+            <li><span>主要方向</span><span>自动化 / 逆向 / 可视化</span></li>
+            <li><span>常用语言</span><span>Python · TypeScript</span></li>
+            <li><span>合作方式</span><span>远程 · 项目制</span></li>
+            <li><span>邮箱</span><span><a data-email href="mailto:hi@yankai.cc.cd">hi@yankai.cc.cd</a></span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 项目 ============ -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Projects</span>
+        <h2>代表项目</h2>
+        <p>以下为占位内容，替换标题、描述与链接即可上线。</p>
+      </div>
+
+      <div class="filters" data-reveal>
+        <button class="chip is-active" type="button" data-filter="all">全部</button>
+        <button class="chip" type="button" data-filter="自动化">自动化</button>
+        <button class="chip" type="button" data-filter="逆向">逆向</button>
+        <button class="chip" type="button" data-filter="前端">前端</button>
+      </div>
+
+      <div class="projects">
+
+        <article class="project" data-tags="自动化,逆向" data-reveal>
+          <div class="project-top">
+            <span class="project-mark" aria-hidden="true">MP</span>
+            <h3>配置表解析器</h3>
+          </div>
+          <p>批量解包运行时资源配置并还原为结构化表格，附带字段字典与校验规则，替代手工抄表。</p>
+          <ul class="tags"><li class="tag">Python</li><li class="tag">MessagePack</li><li class="tag">CLI</li></ul>
+          <a class="project-link" href="#" aria-label="查看项目：配置表解析器">查看详情 <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="project" data-tags="自动化" data-reveal>
+          <div class="project-top">
+            <span class="project-mark" aria-hidden="true">SC</span>
+            <h3>内容批量采集器</h3>
+          </div>
+          <p>按关键词与时间窗口增量采集公开内容，自动去重、分档并按模板导出报表。</p>
+          <ul class="tags"><li class="tag">Node.js</li><li class="tag">并发调度</li></ul>
+          <a class="project-link" href="#" aria-label="查看项目：内容批量采集器">查看详情 <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="project" data-tags="自动化,逆向" data-reveal>
+          <div class="project-top">
+            <span class="project-mark" aria-hidden="true">MK</span>
+            <h3>键鼠宏引擎</h3>
+          </div>
+          <p>图形化的流程编排 + 底层输入注入，支持条件分支、延时补偿与录制回放。</p>
+          <ul class="tags"><li class="tag">C#</li><li class="tag">Win32</li><li class="tag">桌面端</li></ul>
+          <a class="project-link" href="#" aria-label="查看项目：键鼠宏引擎">查看详情 <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="project" data-tags="前端,自动化" data-reveal>
+          <div class="project-top">
+            <span class="project-mark" aria-hidden="true">DB</span>
+            <h3>数据看板模板</h3>
+          </div>
+          <p>零依赖的静态看板模板，读取 JSON 即可渲染图表与卡片，适合快速交付运营数据页。</p>
+          <ul class="tags"><li class="tag">HTML/CSS/JS</li><li class="tag">可视化</li></ul>
+          <a class="project-link" href="#" aria-label="查看项目：数据看板模板">查看详情 <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="project" data-tags="逆向" data-reveal>
+          <div class="project-top">
+            <span class="project-mark" aria-hidden="true">AP</span>
+            <h3>安装包静态分析器</h3>
+          </div>
+          <p>不依赖 SDK，直接解析安装包元信息、权限、组件与网络端点，输出结构化报告。</p>
+          <ul class="tags"><li class="tag">Python</li><li class="tag">安全分析</li></ul>
+          <a class="project-link" href="#" aria-label="查看项目：安装包静态分析器">查看详情 <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="project" data-tags="自动化,前端" data-reveal>
+          <div class="project-top">
+            <span class="project-mark" aria-hidden="true">SG</span>
+            <h3>静态站点生成器</h3>
+          </div>
+          <p>Markdown 进、完整站点出，内置目录、搜索与 RSS，构建产物可直接丢到任意托管。</p>
+          <ul class="tags"><li class="tag">Node.js</li><li class="tag">Markdown</li></ul>
+          <a class="project-link" href="#" aria-label="查看项目：静态站点生成器">查看详情 <span aria-hidden="true">→</span></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 技能 ============ -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Skills</span>
+        <h2>技能与工具</h2>
+      </div>
+
+      <div class="skills">
+        <div class="skill-card" data-reveal>
+          <h3><i aria-hidden="true"></i>语言</h3>
+          <ul>
+            <li>Python</li>
+            <li>TypeScript / JavaScript</li>
+            <li>C#</li>
+            <li>Go（够用）</li>
+          </ul>
+        </div>
+
+        <div class="skill-card" data-reveal>
+          <h3><i aria-hidden="true"></i>工程与自动化</h3>
+          <ul>
+            <li>爬虫与并发调度</li>
+            <li>数据清洗与 ETL</li>
+            <li>CLI 工具设计</li>
+            <li>Git / CI 自动化</li>
+          </ul>
+        </div>
+
+        <div class="skill-card" data-reveal>
+          <h3><i aria-hidden="true"></i>逆向与解析</h3>
+          <ul>
+            <li>二进制与包格式解析</li>
+            <li>协议抓包与还原</li>
+            <li>混淆代码阅读</li>
+            <li>静态分析报告</li>
+          </ul>
+        </div>
+
+        <div class="skill-card" data-reveal>
+          <h3><i aria-hidden="true"></i>前端与交付</h3>
+          <ul>
+            <li>原生 HTML / CSS / JS</li>
+            <li>响应式与无障碍</li>
+            <li>数据可视化</li>
+            <li>静态站点部署</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 经历 ============ -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Experience</span>
+        <h2>经历</h2>
+        <p>占位内容，按「时间 · 角色 · 做了什么」替换。</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item" data-reveal>
+          <div class="tl-meta"><time>2024 — 现在</time><h3>独立开发者 / 自由接单</h3></div>
+          <p>承接自动化工具、数据采集与内部效率系统的设计与开发，交付 10+ 项目。</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-meta"><time>2022 — 2024</time><h3>某科技公司 · 后端工程师</h3></div>
+          <p>负责数据流水线与内部工具链，把核心报表产出从人工整理改为全自动生成。</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-meta"><time>2020 — 2022</time><h3>某互联网公司 · 开发工程师</h3></div>
+          <p>参与业务系统开发与性能优化，主导一项批处理任务的耗时下降 70%。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 联系 ============ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-box" data-reveal>
+        <h2>有活儿？聊两句。</h2>
+        <p>可以发一封邮件说明需求与预期，我通常 24 小时内回复。也欢迎只是来交换想法。</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" data-email href="mailto:hi@yankai.cc.cd">发邮件给我</a>
+          <button class="btn btn-ghost" id="copy-email" type="button">复制邮箱</button>
+        </div>
+        <div class="socials" data-socials></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© <span data-year>2026</span> <span data-name>你的名字</span>. 保留所有权利。</span>
+    <span>由 <a href="#home">yankai.cc.cd</a> 提供 · 纯静态构建</span>
+  </div>
+</footer>
+
+</body>
+</html>
