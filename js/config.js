@@ -9,8 +9,8 @@ window.SITE_CONFIG = {
   name: "Yankai",
   handle: "@312yankai",
   jobTitle: "独立开发者 · 工具作者",
-  domain: "yankai.cc.cd",          // ← 换成你的域名，不带动 http(s)://
-  url: "https://yankai.cc.cd",     // ← 与 domain 保持一致
+  domain: "yankai.cc.cd",          // 不带动 http(s)://
+  url: "https://yankai.cc.cd",     // 与 domain 保持一致
   email: "hi@yankai.cc.cd",
   location: "中国",
 
