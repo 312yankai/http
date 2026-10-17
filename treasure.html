@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>金宝藏 · 时间坐标</title>
+<meta name="description" content="记录藏宝点的坐标与开采结束时间，到期自动清除。">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23ffbc2b'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='%23332200' font-family='sans-serif'%3E金%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/css/style.css">
+<script src="/js/config.js"></script>
+<script defer src="/js/main.js"></script>
+<style>
+  .t-hero { padding: 56px 0 24px; }
+  .t-hero h1 { font-size: clamp(1.7rem, 4.6vw, 2.5rem); font-weight: 700; }
+  .t-hero h1 .grad-text {
+    background: linear-gradient(115deg, #ffbc2b, #fffb83);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .t-hero p { margin-top: 12px; color: var(--muted); max-width: 62ch; }
+
+  .t-grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 900px) { .t-grid { grid-template-columns: 1fr; } }
+
+  .t-panel {
+    border: 1px solid var(--border); background: var(--surface);
+    border-radius: var(--radius); padding: 22px;
+  }
+  .t-panel h2 { font-size: 15px; font-weight: 650; margin-bottom: 16px; }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .field input {
+    width: 100%; padding: 10px 12px; border-radius: 10px; font: inherit; font-size: 14px;
+    color: var(--text); background: var(--bg-soft);
+    border: 1px solid var(--border); outline: none;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow-1); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hint { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .t-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .t-actions .btn { flex: 1; justify-content: center; }
+
+  .t-list { display: flex; flex-direction: column; gap: 12px; }
+  .t-item {
+    display: flex; gap: 16px; align-items: center;
+    border: 1px solid var(--border); background: var(--surface);
+    border-radius: 12px; padding: 16px 18px;
+    animation: tin .3s var(--ease);
+  }
+  @keyframes tin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .t-item.is-gone { opacity: 0; transform: translateX(12px); transition: all .35s var(--ease); }
+
+  .t-main { flex: 1; min-width: 0; }
+  .t-name { font-weight: 620; font-size: 15.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .t-xy {
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--muted);
+    background: var(--bg-soft); border: 1px solid var(--border);
+    padding: 2px 7px; border-radius: 6px;
+  }
+  .t-note { font-size: 13px; color: var(--muted); margin-top: 6px; word-break: break-word; }
+
+  .t-time { text-align: right; flex: none; }
+  .t-left { font-family: var(--font-mono); font-size: 19px; font-weight: 650; letter-spacing: -.02em; }
+  .t-left.warn { color: #ffbc2b; }
+  .t-left.crit { color: #ff6b6b; }
+  .t-until { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .t-del {
+    flex: none; width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+    border: 1px solid var(--border); color: var(--muted); font-size: 16px;
+    transition: all .18s;
+  }
+  .t-del:hover { color: #ff6b6b; border-color: #ff6b6b; }
+
+  .empty {
+    border: 1px dashed var(--border); border-radius: 12px;
+    padding: 40px 20px; text-align: center; color: var(--muted); font-size: 14px;
+  }
+  .toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
+    background: var(--surface); border: 1px solid var(--accent); color: var(--text);
+    padding: 11px 20px; border-radius: 999px; font-size: 14px;
+    opacity: 0; pointer-events: none; transition: all .25s var(--ease); z-index: 60;
+    box-shadow: var(--shadow);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%); }
+  .toast.err { border-color: #ff6b6b; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span>Yankai</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="主导航">
+      <ul class="nav-links">
+        <li><a href="/">首页</a></li>
+        <li><a href="/#projects">项目</a></li>
+        <li><a href="/treasure.html" class="is-active">金宝藏</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="切换主题">☀</button>
+      <button class="icon-btn" id="nav-toggle" type="button" aria-label="展开菜单" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="t-hero">
+    <div class="wrap">
+      <h1><span class="grad-text">金宝藏</span> · 时间坐标</h1>
+      <p>记录藏宝点的坐标和开采结束时间。倒计时归零后自动从列表消失，服务端同时物理删除，不留痕迹。</p>
+    </div>
+  </section>
+
+  <section class="section" style="border-top:0;padding-top:8px;">
+    <div class="wrap">
+      <div class="t-grid">
+
+        <div class="t-panel">
+          <h2>添加一条</h2>
+          <form id="t-form" autocomplete="off">
+            <div class="field">
+              <label for="f-name">地点名称</label>
+              <input id="f-name" name="name" required maxlength="60" placeholder="例如：绛县">
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="f-x">坐标 X</label>
+                <input id="f-x" name="x" type="number" inputmode="numeric" placeholder="657">
+              </div>
+              <div class="field">
+                <label for="f-y">坐标 Y</label>
+                <input id="f-y" name="y" type="number" inputmode="numeric" placeholder="1143">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-ends">开采结束时间</label>
+              <input id="f-ends" name="ends" type="datetime-local" required>
+              <div class="hint">到时自动销毁</div>
+            </div>
+            <div class="field">
+              <label for="f-note">备注（可选）</label>
+              <input id="f-note" name="note" maxlength="200" placeholder="品质 / 探宝者 / 备注">
+            </div>
+            <div class="field">
+              <label for="f-token">写入口令</label>
+              <input id="f-token" name="token" type="password" placeholder="首次填写后自动记住">
+            </div>
+            <div class="t-actions">
+              <button class="btn btn-primary" type="submit">添加</button>
+              <button class="btn btn-ghost" type="button" id="t-refresh">刷新</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="t-panel">
+          <h2>正在开采 <span id="t-count" style="color:var(--muted);font-weight:400;"></span></h2>
+          <div class="t-list" id="t-list"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© <span data-year>2026</span> Yankai</span>
+    <span><a href="/">返回首页</a> · <a href="https://txgz.cc.cd">txgz.cc.cd</a></span>
+  </div>
+</footer>
+
+<div class="toast" id="t-toast"></div>
+
+<script>
+(function () {
+  "use strict";
+  var API = "/api/treasures";
+  var TOKEN_KEY = "treasure-token";
+  var items = [];
+  var timer = null;
+
+  var $ = function (s) { return document.querySelector(s); };
+  var listEl = $("#t-list");
+  var countEl = $("#t-count");
+  var form = $("#t-form");
+
+  function toast(msg, isErr) {
+    var el = $("#t-toast");
+    el.textContent = msg;
+    el.classList.toggle("err", !!isErr);
+    el.classList.add("show");
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { el.classList.remove("show"); }, 2400);
+  }
+
+  function token() {
+    return localStorage.getItem(TOKEN_KEY) || "";
+  }
+
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+  function fmtLeft(sec) {
+    if (sec <= 0) return "已结束";
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = sec % 60;
+    return pad(h) + ":" + pad(m) + ":" + pad(s);
+  }
+
+  function fmtClock(ts) {
+    var d = new Date(ts * 1000);
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) +
+      " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+  }
+
+  function render() {
+    var now = Math.floor(Date.now() / 1000);
+    var alive = items.filter(function (it) { return it.ends_at > now; });
+
+    if (!alive.length) {
+      listEl.innerHTML = '<div class="empty">暂无正在开采的宝藏点<br>添加一条试试</div>';
+      countEl.textContent = "";
+      return;
+    }
+
+    countEl.textContent = "(" + alive.length + ")";
+    listEl.innerHTML = alive.map(function (it) {
+      var left = it.ends_at - now;
+      var cls = left <= 600 ? "crit" : (left <= 1800 ? "warn" : "");
+      var xy = (it.x != null && it.y != null)
+        ? '<span class="t-xy">(' + it.x + "," + it.y + ")</span>" : "";
+      return '<div class="t-item" data-id="' + it.id + '">' +
+        '<div class="t-main">' +
+          '<div class="t-name">' + escapeHtml(it.name) + xy + "</div>" +
+          (it.note ? '<div class="t-note">' + escapeHtml(it.note) + "</div>" : "") +
+        "</div>" +
+        '<div class="t-time">' +
+          '<div class="t-left ' + cls + '">' + fmtLeft(left) + "</div>" +
+          '<div class="t-until">' + fmtClock(it.ends_at) + " 结束</div>" +
+        "</div>" +
+        '<button class="t-del" type="button" data-del="' + it.id + '" aria-label="删除">✕</button>' +
+      "</div>";
+    }).join("");
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function load() {
+    return fetch(API, { headers: { "accept": "application/json" }, cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        items = (d && d.items) || [];
+        render();
+      })
+      .catch(function () { /* 网络抖动忽略 */ });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("#f-name").value.trim();
+    var x = $("#f-x").value;
+    var y = $("#f-y").value;
+    var ends = $("#f-ends").value;
+    var note = $("#f-note").value.trim();
+    var tk = $("#f-token").value.trim() || token();
+
+    if (!name) return toast("地点名称必填", true);
+    if (!ends) return toast("请选择结束时间", true);
+
+    var ts = Math.floor(new Date(ends).getTime() / 1000);
+    if (!ts || ts <= Math.floor(Date.now() / 1000)) return toast("结束时间必须晚于现在", true);
+    if (!tk) return toast("请填写写入口令", true);
+
+    localStorage.setItem(TOKEN_KEY, tk);
+
+    fetch(API, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-token": tk },
+      body: JSON.stringify({
+        name: name,
+        x: x === "" ? null : Number(x),
+        y: y === "" ? null : Number(y),
+        ends_at: ts,
+        note: note,
+      }),
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok) return toast(res.d.error || "添加失败", true);
+        toast("已添加");
+        form.reset();
+        $("#f-token").value = tk;
+        setDefaultEnd();
+        load();
+      })
+      .catch(function () { toast("网络异常", true); });
+  });
+
+  listEl.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-del]");
+    if (!btn) return;
+    var id = btn.getAttribute("data-del");
+    var tk = token();
+    if (!tk) return toast("请先在左侧填写写入口令", true);
+    if (!confirm("删除这条记录？")) return;
+
+    fetch(API + "/" + id, { method: "DELETE", headers: { "x-token": tk } })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok) return toast(res.d.error || "删除失败", true);
+        toast("已删除");
+        load();
+      })
+      .catch(function () { toast("网络异常", true); });
+  });
+
+  $("#t-refresh").addEventListener("click", function () { load(); toast("已刷新"); });
+
+  function setDefaultEnd() {
+    var d = new Date(Date.now() + 2 * 3600 * 1000);
+    var local = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+    $("#f-ends").value = local;
+  }
+
+  // 初始化
+  var saved = token();
+  if (saved) $("#f-token").value = saved;
+  setDefaultEnd();
+  load();
+
+  // 每秒更新倒计时；归零立即移除
+  timer = setInterval(function () {
+    var now = Math.floor(Date.now() / 1000);
+    var expired = items.some(function (it) { return it.ends_at <= now; });
+    if (expired) { load(); return; }
+    var nodes = listEl.querySelectorAll(".t-item");
+    for (var i = 0; i < nodes.length; i++) {
+      var id = Number(nodes[i].getAttribute("data-id"));
+      var it = items.filter(function (x) { return x.id === id; })[0];
+      if (!it) continue;
+      var left = it.ends_at - now;
+      var el = nodes[i].querySelector(".t-left");
+      if (left <= 0) {
+        nodes[i].classList.add("is-gone");
+        (function (node) {
+          setTimeout(function () { if (node.parentNode) node.parentNode.removeChild(node); }, 380);
+        })(nodes[i]);
+        continue;
+      }
+      el.textContent = fmtLeft(left);
+      el.className = "t-left " + (left <= 600 ? "crit" : (left <= 1800 ? "warn" : ""));
+    }
+  }, 1000);
+
+  // 每 20 秒与服务端对齐
+  setInterval(load, 20000);
+})();
+</script>
+
+</body>
+</html>
