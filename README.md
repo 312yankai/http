@@ -1,4 +1,4 @@
-# yankai.cc.cd · 个人作品集站点
+# txgz.cc.cd · 个人作品集站点
 
 纯静态站点：HTML + CSS + 原生 JS，**零依赖、零构建**。托管于 Cloudflare Pages。
 
@@ -18,7 +18,7 @@ site/
 
 ## 1. 上线前还需替换的内容
 
-域名（`yankai.cc.cd`）、显示名（`Yankai`）、GitHub（`312yankai`）、邮箱（`1967372480@qq.com`）已填好。**剩下这几处需要你确认/替换**：
+域名（`txgz.cc.cd`）、显示名（`Yankai`）、GitHub（`312yankai`）、邮箱（`1967372480@qq.com`）已填好。**剩下这几处需要你确认/替换**：
 
 | 位置 | 当前值 | 说明 |
 |---|---|---|
@@ -47,7 +47,7 @@ python -m http.server 8777
 
 ---
 
-## 3. 部署到 Cloudflare Pages（域名 yankai.cc.cd）
+## 3. 部署到 Cloudflare Pages（域名 txgz.cc.cd）
 
 ### 方式一：Git 集成（推荐，改代码自动重新部署）
 
@@ -63,10 +63,10 @@ python -m http.server 8777
    | Build output directory | `/`（若文件在仓库的 `site/` 子目录，则填 `site`）|
 
 4. **Save and Deploy**，等 30 秒左右拿到 `xxx.pages.dev` 临时地址，先访问确认页面正常。
-5. 进入项目 **Custom domains** → **Set up a custom domain** → 输入 `yankai.cc.cd` → Continue。
+5. 进入项目 **Custom domains** → **Set up a custom domain** → 输入 `txgz.cc.cd` → Continue。
 6. 若你的 DNS 已托管在 Cloudflare（推荐）：会自动加好 CNAME 记录，等待状态变 **Active** 即可，HTTPS 证书自动签发。
-   若 DNS 在别处：Cloudflare 会给出一个 CNAME 目标（形如 `xxx.pages.dev`），到你的域名管理后台把 `yankai.cc.cd` 的 **CNAME** 指过去。
-7. 建议同时在 Cloudflare 加一条 `www.yankai.cc.cd` 的 CNAME 指向同一目标，并在 Pages 里也添加该自定义域名。
+   若 DNS 在别处：Cloudflare 会给出一个 CNAME 目标（形如 `xxx.pages.dev`），到你的域名管理后台把 `txgz.cc.cd` 的 **CNAME** 指过去。
+7. 建议同时在 Cloudflare 加一条 `www.txgz.cc.cd` 的 CNAME 指向同一目标，并在 Pages 里也添加该自定义域名。
 
 > 免费额度：每月 500 次构建、无限带宽与请求，个人站完全够用。
 
@@ -85,10 +85,10 @@ wrangler pages deploy . --project-name=yankai-site
 
 ## 4. 绑定域名后的检查清单
 
-- [ ] `https://yankai.cc.cd` 能打开，样式/脚本 200
+- [ ] `https://txgz.cc.cd` 能打开，样式/脚本 200
 - [ ] `http://` 自动跳 `https://`
-- [ ] `https://yankai.cc.cd/404-test` 落到自定义 404 页
-- [ ] `https://yankai.cc.cd/robots.txt` 与 `/sitemap.xml` 可访问
+- [ ] `https://txgz.cc.cd/404-test` 落到自定义 404 页
+- [ ] `https://txgz.cc.cd/robots.txt` 与 `/sitemap.xml` 可访问
 - [ ] 手机端打开正常（导航变抽屉菜单）
 - [ ] 右上角主题切换按钮可用，刷新后记忆生效
 - [ ] 到 [Google Search Console](https://search.google.com/search-console) 提交 `sitemap.xml`
@@ -103,14 +103,14 @@ wrangler pages deploy . --project-name=yankai-site
 ```nginx
 server {
     listen 80;
-    server_name yankai.cc.cd www.yankai.cc.cd;
+    server_name txgz.cc.cd www.txgz.cc.cd;
     root /var/www/site;
     index index.html;
     location / { try_files $uri $uri/ /404.html; }
 }
 ```
 
-`certbot --nginx -d yankai.cc.cd` 一键签 HTTPS。
+`certbot --nginx -d txgz.cc.cd` 一键签 HTTPS。
 
 ---
 

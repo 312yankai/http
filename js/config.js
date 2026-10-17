@@ -9,8 +9,8 @@ window.SITE_CONFIG = {
   name: "Yankai",
   handle: "@312yankai",
   jobTitle: "独立开发者 · 工具作者",
-  domain: "yankai.cc.cd",          // 不带动 http(s)://
-  url: "https://yankai.cc.cd",     // 与 domain 保持一致
+  domain: "txgz.cc.cd",            // 不带动 http(s)://
+  url: "https://txgz.cc.cd",       // 与 domain 保持一致
   email: "1967372480@qq.com",
   location: "中国",
 
@@ -22,6 +22,6 @@ window.SITE_CONFIG = {
   socials: [
     { label: "GitHub", url: "https://github.com/312yankai",  icon: "github" },
     { label: "邮箱",   url: "mailto:1967372480@qq.com",      icon: "mail" },
-    { label: "博客",   url: "https://yankai.cc.cd/blog",     icon: "rss" }
+    { label: "博客",   url: "https://txgz.cc.cd/blog",       icon: "rss" }
   ]
 };

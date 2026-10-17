@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # 上线前把域名换成你自己的
-Sitemap: https://yankai.cc.cd/sitemap.xml
+Sitemap: https://txgz.cc.cd/sitemap.xml
